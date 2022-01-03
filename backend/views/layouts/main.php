@@ -9,6 +9,7 @@ use yii\bootstrap4\Breadcrumbs;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 ?>
@@ -25,17 +26,15 @@ AppAsset::register($this);
 <body class="d-flex flex-column">
 <?php $this->beginBody() ?>
 <div class="wrapper">
-
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
   <ul class="navbar-nav">
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="" role="button"><i class="fas fa-bars"></i></a>
       </li>
-    </ul>
-
+  </ul>
     <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
+  <ul class="navbar-nav ml-auto">
       <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
           <i class="fas fa-expand-arrows-alt"></i>
@@ -74,16 +73,16 @@ AppAsset::register($this);
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
-              <a href="pages/widgets.html" class="nav-link">
-                <i class="nav-icon fas fa-th"></i>
+              <a href="<?php echo Url::to(['/food/index'])?>" class="nav-link">
+              <i class="nav-icon fas fa-hamburger"></i>
                 <p>
-                  FOOD
+                  Food
                 </p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="pages/widgets.html" class="nav-link">
-                <i class="nav-icon fas fa-th"></i>
+              <a href="<?php echo Url::to(['/ingredient/index'])?>" class="nav-link">
+                <i class="nav-icon fas fa-carrot"></i>
                 <p>
                   Ingredient
                 </p>
@@ -101,22 +100,21 @@ AppAsset::register($this);
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
-        <div class="row mb-2">
+        <div class="row">
           <div class="col-sm-6">
-            <h1 class="m-0">My Restaurant</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v1</li>
+            <ol class="breadcrumb float-sm-left ml-3">
+              <li class="breadcrumb-item"><a href="<?php echo Yii::$app->homeUrl;?>"><b>Home</b></a></li>
             </ol>
-          </div><!-- /.col -->
+          </div>
+          <!-- /.col -->
+          <div class="col-sm-6">
+        </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
 
-    <div class="p-4">
+    <div class=" p-3">
         <?php echo $content;?>
     </div>
 
@@ -136,9 +134,6 @@ AppAsset::register($this);
   </aside>
   <!-- /.control-sidebar -->
 </div>
-<script>
-  $.widget.bridge('uibutton', $.ui.button)
-</script>
 <?php $this->endBody() ?>
 </body>
 </html>

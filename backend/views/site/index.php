@@ -4,7 +4,7 @@
 
 $this->title = 'My Yii Application';
 ?>
-<div class="site-index">
+<div class="site-index col-12">
 <!-- Main content -->
 <section class="content">
       <div class="container-fluid">

@@ -10,8 +10,9 @@ use yii\db\Migration;
  * - `{{%ingredient}}`
  * - `{{%ingredient}}`
  * - `{{%ingredient}}`
+ * - `{{%ingredient}}`
  */
-class m220101_140908_create_food_table extends Migration
+class m220103_142057_create_food_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -20,94 +21,94 @@ class m220101_140908_create_food_table extends Migration
     {
         $this->createTable('{{%food}}', [
             'id' => $this->primaryKey(),
-            'name' => $this->string()->notNull(),
-            'igredient_id1' => $this->integer(),
-            'igredient_id2' => $this->integer(),
-            'igredient_id3' => $this->integer(),
-            'igredient_id4' => $this->integer(),
-            'igredient_id5' => $this->integer(),
+            'name' => $this->string(70)->notNull(),
+            'ingredient_id1' => $this->integer(),
+            'ingredient_id2' => $this->integer(),
+            'ingredient_id3' => $this->integer(),
+            'ingredient_id4' => $this->integer(),
+            'ingredient_id5' => $this->integer(),
         ]);
 
-        // creates index for column `igredient_id1`
+        // creates index for column `ingredient_id1`
         $this->createIndex(
-            '{{%idx-food-igredient_id1}}',
+            '{{%idx-food-ingredient_id1}}',
             '{{%food}}',
-            'igredient_id1'
+            'ingredient_id1'
         );
 
         // add foreign key for table `{{%ingredient}}`
         $this->addForeignKey(
-            '{{%fk-food-igredient_id1}}',
+            '{{%fk-food-ingredient_id1}}',
             '{{%food}}',
-            'igredient_id1',
+            'ingredient_id1',
             '{{%ingredient}}',
             'id',
             'CASCADE'
         );
 
-        // creates index for column `igredient_id2`
+        // creates index for column `ingredient_id2`
         $this->createIndex(
-            '{{%idx-food-igredient_id2}}',
+            '{{%idx-food-ingredient_id2}}',
             '{{%food}}',
-            'igredient_id2'
+            'ingredient_id2'
         );
 
         // add foreign key for table `{{%ingredient}}`
         $this->addForeignKey(
-            '{{%fk-food-igredient_id2}}',
+            '{{%fk-food-ingredient_id2}}',
             '{{%food}}',
-            'igredient_id2',
+            'ingredient_id2',
             '{{%ingredient}}',
             'id',
             'CASCADE'
         );
 
-        // creates index for column `igredient_id3`
+        // creates index for column `ingredient_id3`
         $this->createIndex(
-            '{{%idx-food-igredient_id3}}',
+            '{{%idx-food-ingredient_id3}}',
             '{{%food}}',
-            'igredient_id3'
+            'ingredient_id3'
         );
 
         // add foreign key for table `{{%ingredient}}`
         $this->addForeignKey(
-            '{{%fk-food-igredient_id3}}',
+            '{{%fk-food-ingredient_id3}}',
             '{{%food}}',
-            'igredient_id3',
+            'ingredient_id3',
             '{{%ingredient}}',
             'id',
             'CASCADE'
         );
 
-        // creates index for column `igredient_id4`
+        // creates index for column `ingredient_id4`
         $this->createIndex(
-            '{{%idx-food-igredient_id4}}',
+            '{{%idx-food-ingredient_id4}}',
             '{{%food}}',
-            'igredient_id4'
+            'ingredient_id4'
         );
 
         // add foreign key for table `{{%ingredient}}`
         $this->addForeignKey(
-            '{{%fk-food-igredient_id4}}',
+            '{{%fk-food-ingredient_id4}}',
             '{{%food}}',
-            'igredient_id4',
+            'ingredient_id4',
             '{{%ingredient}}',
             'id',
             'CASCADE'
         );
 
-        // creates index for column `igredient_id5`
+        // creates index for column `ingredient_id5`
         $this->createIndex(
-            '{{%idx-food-igredient_id5}}',
+            '{{%idx-food-ingredient_id5}}',
             '{{%food}}',
-            'igredient_id5'
+            'ingredient_id5'
         );
 
         // add foreign key for table `{{%ingredient}}`
         $this->addForeignKey(
-            '{{%fk-food-igredient_id5}}',
+            '{{%fk-food-ingredient_id5}}',
             '{{%food}}',
-            'igredient_id5',
+            'ingredient_id5',
             '{{%ingredient}}',
             'id',
             'CASCADE'
@@ -119,63 +120,63 @@ class m220101_140908_create_food_table extends Migration
      */
     public function safeDown()
     {
-         // drops foreign key for table `{{%ingredient}}`
-         $this->dropForeignKey(
-            '{{%fk-food-igredient_id1}}',
+        // drops foreign key for table `{{%ingredient}}`
+        $this->dropForeignKey(
+            '{{%fk-food-ingredient_id1}}',
             '{{%food}}'
         );
 
-        // drops index for column `igredient_id1`
+        // drops index for column `ingredient_id1`
         $this->dropIndex(
-            '{{%idx-food-igredient_id1}}',
+            '{{%idx-food-ingredient_id1}}',
             '{{%food}}'
         );
 
         // drops foreign key for table `{{%ingredient}}`
         $this->dropForeignKey(
-            '{{%fk-food-igredient_id2}}',
+            '{{%fk-food-ingredient_id2}}',
             '{{%food}}'
         );
 
-        // drops index for column `igredient_id2`
+        // drops index for column `ingredient_id2`
         $this->dropIndex(
-            '{{%idx-food-igredient_id2}}',
+            '{{%idx-food-ingredient_id2}}',
             '{{%food}}'
         );
 
         // drops foreign key for table `{{%ingredient}}`
         $this->dropForeignKey(
-            '{{%fk-food-igredient_id3}}',
+            '{{%fk-food-ingredient_id3}}',
             '{{%food}}'
         );
 
-        // drops index for column `igredient_id3`
+        // drops index for column `ingredient_id3`
         $this->dropIndex(
-            '{{%idx-food-igredient_id3}}',
+            '{{%idx-food-ingredient_id3}}',
             '{{%food}}'
         );
 
         // drops foreign key for table `{{%ingredient}}`
         $this->dropForeignKey(
-            '{{%fk-food-igredient_id4}}',
+            '{{%fk-food-ingredient_id4}}',
             '{{%food}}'
         );
 
-        // drops index for column `igredient_id4`
+        // drops index for column `ingredient_id4`
         $this->dropIndex(
-            '{{%idx-food-igredient_id4}}',
+            '{{%idx-food-ingredient_id4}}',
             '{{%food}}'
         );
 
         // drops foreign key for table `{{%ingredient}}`
         $this->dropForeignKey(
-            '{{%fk-food-igredient_id5}}',
+            '{{%fk-food-ingredient_id5}}',
             '{{%food}}'
         );
 
-        // drops index for column `igredient_id5`
+        // drops index for column `ingredient_id5`
         $this->dropIndex(
-            '{{%idx-food-igredient_id5}}',
+            '{{%idx-food-ingredient_id5}}',
             '{{%food}}'
         );
 
