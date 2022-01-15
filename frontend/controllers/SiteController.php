@@ -2,19 +2,22 @@
 
 namespace frontend\controllers;
 
-use frontend\models\ResendVerificationEmailForm;
-use frontend\models\VerifyEmailForm;
 use Yii;
-use yii\base\InvalidArgumentException;
-use yii\web\BadRequestHttpException;
+use common\models\Food;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 use common\models\LoginForm;
-use frontend\models\PasswordResetRequestForm;
-use frontend\models\ResetPasswordForm;
+use common\models\Ingredient;
+use yii\filters\AccessControl;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use frontend\models\VerifyEmailForm;
+use yii\web\BadRequestHttpException;
+use frontend\models\ResetPasswordForm;
+use yii\base\InvalidArgumentException;
+use frontend\models\PasswordResetRequestForm;
+use frontend\models\ResendVerificationEmailForm;
+use yii\web\Cookie;
 
 /**
  * Site controller
@@ -75,7 +78,61 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $model =  new Food;
+        $one = [];
+        $two = [];
+        $three = [];
+        if($model->load(Yii::$app->request->post())){
+                $food = Food::find()->all();
+                $fizz = [];
+                $k = 0; 
+                $ce = 0; 
+                for($c=1; $c<=5; $c++){
+                    if(!empty($model['ingredient_id'.$c])){
+                        $ce++;
+                    }
+                }             
+                if($ce >= 2){
+                        for($i=1; $i<=5; $i++) {
+                                $ingredient = Ingredient::findOne([
+                                    'id' => $model['ingredient_id'.$i],
+                                    'status' => 1
+                                ]);
+                                if(!empty($ingredient)){
+                                    $fizz[$k] = $ingredient['id'];
+                                    $k++;
+                                }            
+                        }
+                        $count = 0;
+                        for($i=0; $i<count($food); $i++){            
+                            for($j=1; $j <= 5; $j++){
+                                for($h=0; $h < count($fizz); $h++){
+                                    if($food[$i]['ingredient_id'.$j] == $fizz[$h]){
+                                        $count ++;
+                                    }
+                                }
+                            }
+                        if($count == 5){
+                            array_push($one, $food[$i]['name']);
+                        }
+                        else if($count >= 2 && $count < 5){
+                            array_push($two, ['name' => $food[$i]['name'], 'count' => $count]);
+                        }
+                        $count = 0;
+                        }       
+                } else{
+                    array_push($three, 'Please add 2 or more ingredients!');
+                }
+
+            return $this->render('index',[
+                'model' => $model,
+                'one' => $one,
+                'two' => $two,
+                'three' => $three
+            ]);
+        }
+
+        return $this->render('index', ['model' => $model]);
     }
 
     /**
@@ -112,40 +169,6 @@ class SiteController extends Controller
 
         return $this->goHome();
     }
-
-    /**
-     * Displays contact page.
-     *
-     * @return mixed
-     */
-    public function actionContact()
-    {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
-                Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
-            } else {
-                Yii::$app->session->setFlash('error', 'There was an error sending your message.');
-            }
-
-            return $this->refresh();
-        }
-
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Displays about page.
-     *
-     * @return mixed
-     */
-    public function actionAbout()
-    {
-        return $this->render('about');
-    }
-
     /**
      * Signs user up.
      *

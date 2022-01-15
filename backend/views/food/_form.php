@@ -19,41 +19,42 @@ use yii\helpers\ArrayHelper;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?php 
-    echo $form->field($model, 'ingredient_id1')->dropDownList(
-        $data,
-        [
-            'prompt' => 'Select a ingredient 1 ...'
-        ]) 
-    ?>
-    <?php 
-    echo $form->field($model, 'ingredient_id2')->dropDownList(
-        $data,
-        [
-            'prompt' => 'Select a ingredient 2 ...'
-        ]) 
-    ?>
-    <?php 
-    echo $form->field($model, 'ingredient_id3')->dropDownList(
-        $data,
-        [
-            'prompt' => 'Select a ingredient 3 ...'
-        ]) 
-    ?>
-    <?php 
-    echo $form->field($model, 'ingredient_id4')->dropDownList(
-        $data,
-        [
-            'prompt' => 'Select a ingredient 4 ...'
-        ]) 
-    ?>
-    <?php 
-    echo $form->field($model, 'ingredient_id5')->dropDownList(
-        $data,
-        [
-            'prompt' => 'Select a ingredient 5 ...'
-        ]) 
-    ?>
+    <?php echo $form->field($model, 'ingredient_id1')->widget(Select2::classname(),[
+        'data' => $data,
+        'options' => ['placeholder' => 'Select a Ingredient 1'],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+    ])?>
+    <?php echo $form->field($model, 'ingredient_id2')->widget(Select2::classname(),[
+        'data' => $data,
+        'options' => ['placeholder' => 'Select a Ingredient 2'],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+    ])?>
+    <?php echo $form->field($model, 'ingredient_id3')->widget(Select2::classname(),[
+        'data' => $data,
+        'options' => ['placeholder' => 'Select a Ingredient 3'],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+    ])?>
+    <?php echo $form->field($model, 'ingredient_id4')->widget(Select2::classname(),[
+        'data' => $data,
+        'options' => ['placeholder' => 'Select a Ingredient 4'],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+    ])?>
+    <?php echo $form->field($model, 'ingredient_id5')->widget(Select2::classname(),[
+        'data' => $data,
+        'options' => ['placeholder' => 'Select a Ingredient 5'],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+    ])?>
+    
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
